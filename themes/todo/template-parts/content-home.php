@@ -86,11 +86,12 @@
 
 									//Check if task if done or not
 									$completion = '';
-									if(isset($task)) : 
+									if(isset($item)) : 
 										$completion = 'Completed';
 									else :
 										$completion = 'In Progress';
 									endif;
+									echo $completion;
 
 									//Open file
 									$fp = fopen($path, 'a');
@@ -119,12 +120,13 @@
 										<p>You have no tasks. Add some now!</p>
 									</div>
 									<div class="btn__wrapper">
-										<input type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">
+										<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
 									</div>
 								</div>
 							<?php // Show Clear button if there is at least one task
 							else : ?>
 								<div class="btn__wrapper">
+									<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
 									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Clear tasks</a>
 								</div>
 								<?php endif; ?>

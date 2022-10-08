@@ -60,6 +60,21 @@
 		})
 	});
 
+
+	jQuery('#add').on('click', function() {
+		var formData = new FormData(document.getElementById('form'));
+		jQuery.ajax({
+			type:'POST',
+			url: jQuery('#form').attr('action'),
+			data:formData,
+			cache:false,
+			contentType: false,
+			processData: false,
+			}).done(function() {
+				location.reload(true);
+		});
+	});
+
 	jQuery('#delete').on('click', function() {
 		if(confirm("Are you sure want to delete your tasks?")) {
 			jQuery.ajax({
