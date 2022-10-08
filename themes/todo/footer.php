@@ -38,38 +38,37 @@
 /* JQuery
 ------------------------------------- */
 
-jQuery(document).ready(function ($) {
+	jQuery(document).ready(function ($) {
 
-	jQuery('input[type="checkbox"').on('click', function () {
-		jQuery(this).parent().find('#checkLabel').toggleClass('active');
-	});	
-});
+		jQuery('input[type="checkbox"').on('click', function () {
+			jQuery(this).parent().find('#checkLabel').toggleClass('active');
+		});	
+	});
 
-jQuery('#form').on('submit',function(e){
-	e.preventDefault();
-	var formData = new FormData(this);
-	jQuery.ajax({
-		type:'POST',
-		url: jQuery('#form').attr('action'),
-		data:formData,
-		cache:false,
-		contentType: false,
-		processData: false,
-	}).done(function() {
+	jQuery('#form').on('submit',function(e){
+		e.preventDefault();
+		var formData = new FormData(this);
+		jQuery.ajax({
+			type:'POST',
+			url: jQuery('#form').attr('action'),
+			data:formData,
+			cache:false,
+			contentType: false,
+			processData: false,
+		}).done(function() {
 			location.reload(true);
-			alert('Reloading Page');
 		})
 	});
 
-
 	jQuery('#delete').on('click', function() {
-		jQuery.ajax({
-			method: "POST",
-			url: "deletion.php",
-			}).done(function() {
-				location.reload(true);
-				alert('Clearing tasks...');
-		});
+		if(confirm("Are you sure want to delete your tasks?")) {
+			jQuery.ajax({
+				method: "POST",
+				url: "deletion.php",
+				}).done(function() {
+					location.reload(true);
+			});
+		}
 	});
 </script>
 

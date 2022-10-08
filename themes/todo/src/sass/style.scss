@@ -6,6 +6,7 @@ $color__lgray: #BDBDBD;
 $color__lgray2: #B4B4B4;
 $color__gray: #333333;
 $color__bg: #E5E5E5;
+$color__font-main: #000;
 
 /* Typography
 -------------------------------*/
@@ -31,6 +32,50 @@ p {
 	margin: 0;
 	margin-bottom: 1em;
 }
+
+.btn, input[value='submit'] {
+	color: #fff;
+	background-color: $color__blue;
+	font-weight: bold;
+	text-decoration: none;
+	padding: .5em .75em;
+	border-radius: 8px;
+	border: 2px solid $color__blue;
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	min-width: 120px;
+	cursor: pointer;
+
+	&:hover, &:active, &:focus {
+		background-color: transparent;
+		color: $color__blue;
+	}
+}
+
+.btn::after {
+	content: "";
+	background: #000;
+	position: absolute;
+	z-index: -1;
+	padding: 0.85em 0.15em;
+	display: block;
+	opacity: 0;
+  }
+ 
+  .btn.slideFromLeft:hover::after {
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	transition: all 0.2s;
+	opacity: 1;
+  }
+  .btn.slideFromLeft::after {
+	top: 0;
+	bottom: 0;
+	right: 75%;
+  }
 
 .sr {
 	display: none;
@@ -189,6 +234,12 @@ form {
 		#item {
 
 		}
+	}
+
+	.flex__wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 }
 
