@@ -1,107 +1,252 @@
-/*!
-Theme Name: todo
-Theme URI: http://underscores.me/
-Author: Lightstream
-Author URI: http://underscores.me/
-Description: Description
-Version: 1.0.0
-Tested up to: 5.4
-Requires PHP: 5.6
-License: GNU General Public License v2 or later
-License URI: LICENSE
-Text Domain: todo
-Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+/* Variables
+-------------------------------*/
 
-This theme, like WordPress, is licensed under the GPL.
-Use it to make something cool, have fun, and share what you've learned.
+$color__blue: #29ABE2;
+$color__lgray: #BDBDBD;
+$color__lgray2: #B4B4B4;
+$color__gray: #333333;
+$color__bg: #E5E5E5;
 
-todo is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
-Underscores is distributed under the terms of the GNU GPL v2 or later.
+/* Typography
+-------------------------------*/
 
-Normalizing styles have been helped along thanks to the fine work of
-Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
-*/
+body {
+	font-family: 'Rubik';
+	background-color: $color__bg;
+	background-image: url('http://todo.test/wp-content/uploads/2022/10/bg.png');
+	background-size: cover;
+	background-position-x: center;
+}
 
-/*--------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
-# Generic
-	- Normalize
-	- Box sizing
-# Base
-	- Typography
-	- Elements
-	- Links
-	- Forms
-## Layouts
-# Components
-	- Navigation
-	- Posts and pages
-	- Comments
-	- Widgets
-	- Media
-	- Captions
-	- Galleries
-# plugins
-	- Jetpack infinite scroll
-# Utilities
-	- Accessibility
-	- Alignments
+h1 {
+	margin: 0;
+	margin-bottom: 1em;
+}
 
---------------------------------------------------------------*/
+h2 {
+	margin: 32px 0;
+}
 
-/* RFS
---------------------------------------------- */
+p {
+	margin: 0;
+	margin-bottom: 1em;
+}
 
-@import "../../node_modules/rfs/scss";
+.sr {
+	display: none;
+}
 
-// Import variables and mixins.
-@import "abstracts/abstracts";
+@media (min-width: 768px) {
 
-/*--------------------------------------------------------------
-# Generic
---------------------------------------------------------------*/
+	h1 {
 
-/* Normalize
---------------------------------------------- */
-@import "generic/normalize";
+	}
 
-/* Box sizing
---------------------------------------------- */
-@import "generic/box-sizing";
+	h2 {
 
-/*--------------------------------------------------------------
-# Base
---------------------------------------------------------------*/
-@import "base/base";
+	}
 
-/*--------------------------------------------------------------
-# Layouts
---------------------------------------------------------------*/
-// @import "layouts/content-sidebar"; // Uncomment this line for a sidebar on right side of your content.
-// @import "layouts/sidebar-content"; // Uncomment this line for a sidebar on left side of your content.
+	p {
+		
+	}
+}
 
-/*--------------------------------------------------------------
-# Components
---------------------------------------------------------------*/
-@import "components/components";
+@media (min-width: 992px) {
+	
+	h1 {
 
-/*--------------------------------------------------------------
-# Plugins
---------------------------------------------------------------*/
+	}
 
-/* Jetpack infinite scroll
---------------------------------------------- */
-@import "plugins/jetpack/infinite-scroll";
+	h2 {
 
-/*--------------------------------------------------------------
-# Utilities
---------------------------------------------------------------*/
+	}
 
-/* Accessibility
---------------------------------------------- */
-@import "utilities/accessibility";
+	p {
+		
+	}
+}
 
-/* Alignments
---------------------------------------------- */
-@import "utilities/alignments";
+@media (min-width: 1200px) {
+	
+	h1 {
+
+	}
+
+	h2 {
+		font-size: 36px;
+	}
+
+	p {
+
+	}
+}
+
+/* Body
+-------------------------------*/
+
+.outer__wrapper {
+
+	height: 960px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form__wrapper {    
+    
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+	padding: 56px;
+	padding-bottom: 62px;
+	width: 696px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    border-radius: 16px;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+form {
+
+	#task {
+		background-image: url('http://todo.test/wp-content/uploads/2022/10/arrow.png');
+		background-size: auto;
+		background-repeat: no-repeat;
+		background-position-x: 98%;
+		background-position-y: center;
+		width: 691px;
+		height: 51px;
+		padding-left: 16px;
+		margin: 0;
+		border: 3px solid $color__lgray2;
+		border-radius: 12px;
+		
+		&::placeholder {
+			font-style: normal;
+			font-weight: 400;
+			font-size: 18px;
+			line-height: 21px;
+			color: $color__gray;
+		}
+	}
+
+	.checkbox__wrapper {
+		margin-bottom: 2em;
+		display: flex;
+		align-items: center;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		label {
+			margin-left: 1em;
+
+			&.active {
+				text-decoration: line-through;
+			}
+		}
+
+		input[type="checkbox"] {
+
+			&:checked {
+				color: $color__blue;
+				accent-color: $color__blue;
+			}
+	
+			&:checked::after {
+				color:white;
+			}
+		}
+	}
+
+	#item {
+	}
+}
+
+@media (min-width: 768px) {
+
+	.outer__wrapper {
+	
+	}
+	
+	.form__wrapper {    
+
+	}
+	
+	form {
+	
+		#task {
+		
+			
+			&::placeholder {
+			
+			}
+		}
+	
+		#item {
+
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	
+	.outer__wrapper {
+	
+	}
+	
+	.form__wrapper {    
+
+	}
+	
+	form {
+	
+		#task {
+		
+			
+			&::placeholder {
+			
+			}
+		}
+	
+		#item {
+			
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	
+	.outer__wrapper {
+	
+	}
+	
+	.form__wrapper {    
+
+	}
+	
+	form {
+	
+		#task {
+		
+			
+			&::placeholder {
+			
+			}
+		}
+
+		input {
+			width: 3em;
+			height: 3em;
+		}
+
+		label {
+			font-size: 32px;
+			font-size: 2em;
+			line-height: 38px;
+		}
+	}
+}

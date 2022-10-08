@@ -141,10 +141,6 @@ function todo_scripts() {
 	wp_enqueue_style( 'todo-style', get_stylesheet_directory_uri() . '/dist/css/style.css', array(), _S_VERSION );
 	wp_style_add_data( 'todo-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'todo-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
-	
-	wp_enqueue_script( 'todo-vendor', get_template_directory_uri() . '/dist/js/vendor.js', array('jquery'), _S_VERSION, true );
-
 	wp_enqueue_script( 'todo-scripts', get_template_directory_uri() . '/dist/js/bundle.js', array('jquery', 'todo-vendor'), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -184,3 +180,11 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+function myglobalvar() {
+	global $task;
+	if (isset($_POST['task'])) :
+		$task = $_POST['task'];
+	endif;
+}
+add_action( 'after_setup_theme', 'myglobalvar' );
