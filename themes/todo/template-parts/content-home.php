@@ -13,6 +13,9 @@
 		if (isset($_POST['task'])) :
 			$task = $_POST['task'];
 		endif;
+		if (isset($_POST['item'])) :
+			$status = $_POST['item'];
+		endif;
 	?>
 
 	<?php
@@ -30,7 +33,7 @@
 		printf('Connected successfully.<br />');
 
 		// SQL QUERY
-		$query  = "SELECT item FROM Tasks";
+		$query  = "SELECT * FROM Tasks";
 
 		// FETCHING DATA FROM DATABASE
 		$result = mysqli_query($conn, $query);
@@ -57,15 +60,23 @@
 								//OUTPUT DATA OF EACH ROW
 								if (mysqli_num_rows($result) > 0) {
 									$rowNumber = 0;
+									// var_dump( $result );
+									// var_dump( mysqli_fetch_assoc($result) );
+									$uniqueID = 0;
 									while ($row = mysqli_fetch_assoc($result)) { 
-										foreach ($row as $key) { ?>
+										// foreach ($row as $key => $value) { ?>
+											<?php 
+												$uniqueID++;
+												echo $uniqueID;
+											?>
 											<div class="checkbox__wrapper">
-												<input type="checkbox" id="item" name="item">
+												<input id="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> value="<?php echo $uniqueID?>" type="checkbox" name="item<?php echo $uniqueID?>">
 												<label id="checkLabel" for="item">
-													<?php echo $key?>
+										 			<?php echo $row['item'] ?>
 												</label>
 											</div>
-										<?php } 
+										<?php 
+										// } 
 
 										//Iterate row number
 										$rowNumber++;
@@ -91,11 +102,10 @@
 									else :
 										$completion = 'In Progress';
 									endif;
-									echo $completion;
 
 									//Open file
 									$fp = fopen($path, 'a');
-									$data = array($key, $submissionTime->format('m/d/y H:i:s'), $completion);
+									$data = array($row, $submissionTime->format('m/d/y H:i:s'), $completion);
 
 									fputcsv($fp, $data);
 									fclose($fp);
@@ -127,6 +137,7 @@
 							else : ?>
 								<div class="btn__wrapper">
 									<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
+									<a id="update" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Update tasks</a>
 									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Clear tasks</a>
 								</div>
 								<?php endif; ?>
@@ -137,3 +148,4 @@
 			</div>
 		</div>
 	</section>
+

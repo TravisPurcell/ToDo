@@ -60,7 +60,6 @@
 		})
 	});
 
-
 	jQuery('#add').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		jQuery.ajax({
@@ -75,15 +74,27 @@
 		});
 	});
 
+	jQuery('#update').on('click', function() {
+		
+		// if(confirm("Are you sure want to update your tasks?")) {
+			jQuery.ajax({
+				method: "POST",
+				url: "update.php",
+				}).done(function() {
+					location.reload(true);
+			});
+		// }
+	});
+
 	jQuery('#delete').on('click', function() {
-		if(confirm("Are you sure want to delete your tasks?")) {
+		// if(confirm("Are you sure want to delete your tasks?")) {
 			jQuery.ajax({
 				method: "POST",
 				url: "deletion.php",
 				}).done(function() {
 					location.reload(true);
 			});
-		}
+		// }
 	});
 </script>
 
