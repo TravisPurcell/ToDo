@@ -59,57 +59,48 @@
 
 								//OUTPUT DATA OF EACH ROW
 								if (mysqli_num_rows($result) > 0) {
-									$rowNumber = 0;
-									// var_dump( $result );
-									// var_dump( mysqli_fetch_assoc($result) );
+					
 									$uniqueID = 0;
-									while ($row = mysqli_fetch_assoc($result)) { 
-										// foreach ($row as $key => $value) { ?>
-											<?php 
-												$uniqueID++;
-												echo $uniqueID;
-											?>
-											<div class="checkbox__wrapper">
-												<input name="item[]" value="<?php echo $uniqueID ?>" id="item<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
-												<label id="checkLabel" for="item">
-										 			<?php echo $row['item'] ?>
-												</label>
-											</div>
-										<?php 
-										// } 
+									while ($row = mysqli_fetch_assoc($result)) :
+										$uniqueID++;
+									?>
+									
+									<div class="checkbox__wrapper">
+										<input name="item[]" value="<?php echo $uniqueID ?>" id="item<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+										<label id="checkLabel" for="item">
+											<?php echo $row['item'] ?>
+										</label>
+									</div>
+								<?php endwhile;
 
-										//Iterate row number
-										$rowNumber++;
-									}
+								//Generate output for text file
+								//Get CSV directoy
+								$path = get_template_directory() . '/tasks.csv';
 
-									//Generate output for text file
-									//Get CSV directoy
-									$path = get_template_directory() . '/tasks.csv';
-
-									//Check if file exists
-									if( !file_exists( $path ) ){ 
-										$fp = fopen($path, 'a');
-
-										//Create Header data
-										$dataHeader = array('Task', 'Submitted On', 'Completed?');
-										fputcsv($fp, $dataHeader);	
-									}
-
-									//Check if task if done or not
-									$completion = '';
-									if(isset($item)) : 
-										$completion = 'Completed';
-									else :
-										$completion = 'In Progress';
-									endif;
-
-									//Open file
+								//Check if file exists
+								if( !file_exists( $path ) ){ 
 									$fp = fopen($path, 'a');
-									$data = array($row, $submissionTime->format('m/d/y H:i:s'), $completion);
 
-									fputcsv($fp, $data);
-									fclose($fp);
-								?>
+									//Create Header data
+									$dataHeader = array('Task', 'Submitted On', 'Completed?');
+									fputcsv($fp, $dataHeader);	
+								}
+
+								//Check if task if done or not
+								$completion = '';
+								if(isset($item)) : 
+									$completion = 'Completed';
+								else :
+									$completion = 'In Progress';
+								endif;
+
+								//Open file
+								$fp = fopen($path, 'a');
+								$data = array($row, $submissionTime->format('m/d/y H:i:s'), $completion);
+
+								fputcsv($fp, $data);
+								fclose($fp);
+							?>
 							<div class="flex__wrapper">
 								<div class="marker">
 									<?php if ($tasksRemaining == 0) : ?>
@@ -123,6 +114,7 @@
 								</div>
 							<?php //End mysqli fetch while loop 
 							} ?>
+
 							<?php // Show Add tasks button if there are no tasks
 							if ($tasksRemaining == 0) : ?>
 								<div class="flex__wrapper">
@@ -148,4 +140,3 @@
 			</div>
 		</div>
 	</section>
-
