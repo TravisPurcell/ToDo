@@ -75,11 +75,15 @@
 	});
 
 	jQuery('#update').on('click', function() {
-		
+		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
 			jQuery.ajax({
 				method: "POST",
 				url: "update.php",
+				data:formData,
+				cache:false,
+				contentType: false,
+				processData: false,
 				}).done(function() {
 					location.reload(true);
 			});

@@ -70,7 +70,7 @@
 												echo $uniqueID;
 											?>
 											<div class="checkbox__wrapper">
-												<input id="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> value="<?php echo $uniqueID?>" type="checkbox" name="item<?php echo $uniqueID?>">
+												<input name="item[]" value="<?php echo $uniqueID ?>" id="item<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<label id="checkLabel" for="item">
 										 			<?php echo $row['item'] ?>
 												</label>
