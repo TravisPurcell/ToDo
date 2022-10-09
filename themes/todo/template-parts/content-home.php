@@ -71,6 +71,11 @@
 
 								//Calculate number of tasks remaining 
 								$tasksRemaining = mysqli_num_rows($result);
+								// $taskedCompleted = array_map(function ($arr) {
+								// 	return $arr['num'];
+								// }, $arr);
+
+								// echo print_r($tasksCompleted);
 
 								//OUTPUT DATA OF EACH ROW
 								if (mysqli_num_rows($result) > 0) {
@@ -79,12 +84,26 @@
 									while ($row = mysqli_fetch_assoc($result)) :
 										$uniqueID++;
 									?>
+
+									<?php
+										if(isset($_POST['item'])) {
+										$checked = $_POST['item'];
+										$counter = count($checked);
+										echo $counter;
+									}
+									?>
 									
 									<div class="checkbox__wrapper">
-										<input name="item[]" value="<?php echo $uniqueID ?>" id="item<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
-										<label id="checkLabel" for="item">
-											<?php echo $row['item'] ?>
-										</label>
+										<div>
+											<?php if(!isset($_POST['item'])) { ?>
+												<input class="complete" name="item[]" value="<?php echo $uniqueID ?>" id="complete<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+											<?php } else { ?>
+												<input class="uncheck" name="item[]" value="<?php echo $uniqueID ?>" id="complete<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+											<?php }?>
+											<label id="checkLabel" for="item"><?php echo $row['item'] ?></label>
+										</div>
+										<input placeholder="Update task" type="text" id="updateTask" name="update[]">
+										<label class="sr" for="fname">First name:</label>
 									</div>
 								<?php 
 
@@ -101,7 +120,7 @@
 									fputcsv($fp, $dataHeader);	
 								}
 
-								//Open file
+								//Open 
 								$fp = fopen($path, 'a');
 								$data = array($row['item'], $submissionTime->format('m/d/y H:i:s'));
 
@@ -112,12 +131,10 @@
 							<div class="flex__wrapper">
 								<div class="marker">
 									<?php if ($tasksRemaining == 0) : ?>
-										<p>Goods News! You have nothing to do.<br> <?php echo $tasksRemaining ?> tasks remaining.</p>
+										<p>Goods News! You have nothing to do!</p>
 									<?php elseif 
 									($tasksRemaining < 5) : ?>
-										<p>Almost there.<br> You have <?php echo $tasksRemaining ?> thing left to do!</p>
-									 <?php else : ?>
-										<p>You have way too many tasks to do! (<?php echo $tasksRemaining ?>)</p>
+										<p>Almost there. Keep going!</p>
 									<?php endif; ?>
 								</div>
 							<?php //End mysqli fetch while loop 
@@ -137,8 +154,9 @@
 							else : ?>
 								<div class="btn__wrapper">
 									<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
-									<a id="update" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Update tasks</a>
-									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Clear tasks</a>
+									<a id="update" href="#" class="btn slideFromLeft" aria-label="Update tasks">Update tasks</a>
+									<a id="clear" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Clear tasks</a>
+									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Dlete tasks">Delete tasks</a>
 								</div>
 						
 								<?php endif; ?>

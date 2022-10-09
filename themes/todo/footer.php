@@ -90,6 +90,45 @@
 		// }
 	});
 
+	jQuery('.complete').on('click', function() {
+		var formData = new FormData(document.getElementById('form'));
+		// if(confirm("Are you sure want to complete your tasks?")) {
+			jQuery.ajax({
+				method: "POST",
+				url: "complete.php",
+				data:formData,
+				cache:false,
+				contentType: false,
+				processData: false,
+				}).done(function() {
+					location.reload(true);
+			});
+		// }
+	});
+
+	jQuery('#clear').on('click', function() {
+		var formData = new FormData(document.getElementById('form'));
+		// if(confirm("Are you sure want to update your tasks?")) {
+			jQuery.ajax({
+				method: "POST",
+				url: "clear.php",
+				data:formData,
+				cache:false,
+				contentType: false,
+				processData: false,
+				}).done(function() {
+					location.reload(true);
+			});
+		// }
+	});
+
+	//Change class of checked boxes
+	jQuery('input[type="checkbox"]:checked').siblings().addClass('active');
+
+	//Cross out labels of checked boxes
+	jQuery('input[type="checkbox"]:checked').removeClass('complete');
+	jQuery('input[type="checkbox"]:checked').addClass('uncheck');
+
 	jQuery('#delete').on('click', function() {
 		// if(confirm("Are you sure want to delete your tasks?")) {
 			jQuery.ajax({
@@ -100,5 +139,7 @@
 			});
 		// }
 	});
+
+
 </script>
 
