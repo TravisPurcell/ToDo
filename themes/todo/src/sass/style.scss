@@ -241,6 +241,16 @@ form {
 		justify-content: space-between;
 		align-items: center;
 	}
+
+	.download__wrapper {
+		margin-top: 1em;
+		text-align: right;
+
+		a {
+			color: $color__blue;
+			font-weight: bold;
+		}
+	}
 }
 
 @media (min-width: 992px) {

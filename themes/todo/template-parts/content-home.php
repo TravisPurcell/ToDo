@@ -18,6 +18,21 @@
 		endif;
 	?>
 
+	<?php //Generate full URL
+		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+			$link = "https";
+		else $link = "http";
+		
+		// Here append the common URL characters.
+		$link .= "://";
+		
+		// Append the host(domain name, ip) to the URL.
+		$link .= $_SERVER['HTTP_HOST'];
+		
+		// Append the requested resource location to the URL
+		$link .= $_SERVER['REQUEST_URI'];
+	?>
+
 	<?php
 		//Connect to Database
 		$dbhost = 'localhost';
@@ -71,7 +86,7 @@
 											<?php echo $row['item'] ?>
 										</label>
 									</div>
-								<?php endwhile;
+								<?php 
 
 								//Generate output for text file
 								//Get CSV directoy
@@ -82,24 +97,17 @@
 									$fp = fopen($path, 'a');
 
 									//Create Header data
-									$dataHeader = array('Task', 'Submitted On', 'Completed?');
+									$dataHeader = array('Task', 'Submitted On');
 									fputcsv($fp, $dataHeader);	
 								}
 
-								//Check if task if done or not
-								$completion = '';
-								if(isset($item)) : 
-									$completion = 'Completed';
-								else :
-									$completion = 'In Progress';
-								endif;
-
 								//Open file
 								$fp = fopen($path, 'a');
-								$data = array($row, $submissionTime->format('m/d/y H:i:s'), $completion);
+								$data = array($row['item'], $submissionTime->format('m/d/y H:i:s'));
 
 								fputcsv($fp, $data);
 								fclose($fp);
+							endwhile;
 							?>
 							<div class="flex__wrapper">
 								<div class="marker">
@@ -132,7 +140,11 @@
 									<a id="update" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Update tasks</a>
 									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Clear tasks">Clear tasks</a>
 								</div>
+						
 								<?php endif; ?>
+							</div>
+							<div class="download__wrapper">
+								<a download="Tasks.csv" id="download" href="<?php echo $link . 'tasks.csv'?>" aria-label="Clear tasks">Download tasks</a>
 							</div>
 						</form>
 					</div>
