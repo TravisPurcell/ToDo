@@ -129,14 +129,14 @@ jQuery(document).ready(function ($) {
 
 	//Delete all tasks
 	jQuery('#delete').on('click', function() {
-		// if(confirm("Are you sure want to delete your tasks?")) {
+		if(confirm("Warning! This will delete all tasks!\nAre you sure?")) {
 			jQuery.ajax({
 				method: "POST",
 				url: "deletion.php",
 				}).done(function() {
 					location.reload(true);
 			});
-		// }
+		}
 	});
 
 	//Change class of checked boxes
@@ -146,7 +146,7 @@ jQuery(document).ready(function ($) {
 	jQuery('input[type="checkbox"]:checked').removeClass('complete');
 	jQuery('input[type="checkbox"]:checked').addClass('uncheck');
 
-	//Count Number of checked boxes
+	//Count Number of checked boxes & change status
 	var tasksTotal = jQuery('.checkbox__wrapper').length;
 	var tasksCompleted = jQuery('.checked').length;
 	var tasksRemaining = tasksTotal - tasksCompleted;

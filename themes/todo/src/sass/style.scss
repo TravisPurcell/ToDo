@@ -153,6 +153,10 @@ p {
     flex-grow: 0;
 }
 
+.btn__wrapper {
+	margin-top: 1em;
+}
+
 .warning {
 	margin-top: .5em;
 	font-size: 12px;
@@ -160,6 +164,16 @@ p {
 }
 
 form {
+
+	.taskSelect {
+		margin-right: 1em;
+		margin-top: .5em;
+		margin-bottom: 2em;
+		font-size: 12px;
+		font-size: .75em;
+		display: flex;
+		justify-content: flex-end;
+	}
 
 	#task {
 		background-image: url('http://todo.test/wp-content/uploads/2022/10/arrow.png');
@@ -218,10 +232,6 @@ form {
 			}
 		}
 	}
-
-	.btn__wrapper {
-		margin-top: 1em;
-	}
 }
 
 @media (min-width: 768px) {
@@ -241,7 +251,7 @@ form {
 	}
 
 	.download__wrapper {
-		margin-top: 1em;
+		margin-top: 1.5em;
 		text-align: right;
 
 		a {
@@ -282,9 +292,16 @@ form {
 		input[type="text"] {
 			border: none;
 			border-bottom: 1px solid $color__font-main;
-			margin-left: 3em;
-			width: 300px;
 			height: 3em;
+			width: 90%;
+		}
+
+		input[type="number"] {
+			border: none;
+			border-bottom: 1px solid $color__font-main;
+			margin-left: 1em;
+			height: 3em;
+			width: 30px;
 		}
 	}
 }

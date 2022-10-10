@@ -23,7 +23,8 @@
 		// Append the requested resource location to the URL
 		$link .= $_SERVER['REQUEST_URI'];
 
-		$link .= 'wp-content/themes/todo/tasks.csv';
+		$link ;
+		echo $link;
 	?>
 
 	<?php
@@ -56,14 +57,14 @@
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
 								<input type="text" placeholder="Add new task*" id="task" name="task">
 								<label class="sr" for="task">Add a new task</label>
-								<p class="warning">Task will not be added if field is left empty.</p>
+								<p class="warning">*Task will not be added if field is left empty.</p>
 							<h2>Things to Do</h2>
 							<?php 
 								//Get Submission time
 								date_default_timezone_set("America/New_York");
 								$submissionTime = new DateTime();
 
-								$tasksRemaining = mysqli_num_rows($result);
+								$tasksTotal = mysqli_num_rows($result);
 					
 
 								//OUTPUT DATA OF EACH ROW
@@ -94,9 +95,6 @@
 											<?php }?>
 											<label id="checkLabel" for="item"><?php echo $item ?></label>
 										</div>
-									
-										<input placeholder="Update task" type="text" id="updateTask" name="update[]">
-										<label class="sr" for="fname">First name:</label>
 									</div>
 								<?php 
 
@@ -119,12 +117,18 @@
 
 								fputcsv($fp, $data);
 								fclose($fp);
+								 
 							endwhile;
 							?>
 
+							<input placeholder="Update task" type="text" id="updateTask" name="update">
+							<label class="sr" for="fname">First name:</label>
+							<input min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
+							<label class="taskSelect" for="fname">Select a task number by row to update &nbsp;<strong>(Required)</strong></label>
+
 								<div class="flex__wrapper">
 									<div class="marker">
-										<?php if ($tasksRemaining !== 0) : ?>
+										<?php if ($tasksTotal !== 0) : ?>
 											<p id="tasksRemaining"></p>
 										<?php endif;?> 
 									</div>
@@ -132,28 +136,28 @@
 							} ?>
 
 							<?php // Show Add tasks button if there are no tasks
-							if ($tasksRemaining == 0) : ?>
+							if ($tasksTotal == 0) : ?>
 								<div class="flex__wrapper">
 									<div class="marker">
 										<p id="tasksRemaining"></p>
 									</div>
 									<div class="btn__wrapper">
-										<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
+										<a tabindex="0" id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
 									</div>
 								</div>
 							<?php // Show all buttons if there is at least one task
 							else : ?>
 								<div class="btn__wrapper">
-									<a id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
-									<a id="update" href="#" class="btn slideFromLeft" aria-label="Update tasks">Update tasks</a>
-									<a id="clear" href="#" class="btn slideFromLeft" aria-label="Uncheck tasks">Uncheck tasks</a>
-									<a id="delete" href="#" class="btn slideFromLeft" aria-label="Dlete tasks">Delete tasks</a>
+									<a tabindex="0" id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
+									<a tabindex="0" id="update" href="#" class="btn slideFromLeft" aria-label="Update tasks">Update tasks</a>
+									<a tabindex="0" id="clear" href="#" class="btn slideFromLeft" aria-label="Uncheck tasks">Uncheck tasks</a>
+									<a tabindex="0" id="delete" href="#" class="btn slideFromLeft" aria-label="Dlete tasks">Delete tasks</a>
 								</div>
 						
 								<?php endif; ?>
 							</div>
 							<div class="download__wrapper">
-								<a download="Tasks.csv" id="download" href="<?php echo $link ?>" aria-label="Download tasks">Download CSV of Tasks</a>
+								<a download="Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV of Tasks</a>
 							</div>
 						</form>
 					</div>
