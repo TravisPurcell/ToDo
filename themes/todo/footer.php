@@ -61,7 +61,8 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Add Task
-	jQuery('#add').on('click', function() {
+	jQuery('#add').on('click', function(e) {
+		e.preventDefault();
 		var formData = new FormData(document.getElementById('form'));
 		jQuery.ajax({
 			type:'POST',
@@ -75,9 +76,25 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+	// jQuery('.add').on('keypress', function (e) {
+    // 	if (e.which == 13) {
+	// 	var formData = new FormData(document.getElementById('form'));
+	// 	jQuery.ajax({
+	// 		type:'POST',
+	// 		url: jQuery('#form').attr('action'),
+	// 		data:formData,
+	// 		cache:false,
+	// 		contentType: false,
+	// 		processData: false,
+	// 		}).done(function() {
+	// 			location.reload(true);
+	// 	});
+	// });
+
 
 	// Update task
-	jQuery('#update').on('click', function() {
+	jQuery('#update').on('click', function(e) {
+		e.preventDefault();
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
 			jQuery.ajax({
@@ -94,7 +111,8 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Complete task
-	jQuery('.complete').on('click', function() {
+	jQuery('.complete').on('click', function(e) {
+		e.preventDefault();
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to complete your tasks?")) {
 			jQuery.ajax({
@@ -111,7 +129,8 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Uncheck all tasks
-	jQuery('#clear').on('click', function() {
+	jQuery('#clear').on('click', function(e) {
+		e.preventDefault();
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
 			jQuery.ajax({
@@ -128,7 +147,8 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Delete all tasks
-	jQuery('#delete').on('click', function() {
+	jQuery('#delete').on('click', function(e) {
+		e.preventDefault();
 		if(confirm("Warning! This will delete all tasks!\nAre you sure?")) {
 			jQuery.ajax({
 				method: "POST",
