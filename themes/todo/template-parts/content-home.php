@@ -8,15 +8,6 @@
  */
 
 ?>
-	<?php 
-		//Store Post form data in variable
-		if (isset($_POST['task'])) :
-			$task = $_POST['task'];
-		endif;
-		if (isset($_POST['item'])) :
-			$status = $_POST['item'];
-		endif;
-	?>
 
 	<?php //Generate full URL
 		if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
@@ -59,7 +50,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="form__wrapper">
-						<form id="form" action="storage.php" method="post">
+						<form id="form" action="update.php" method="post">
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
 								<input type="text" placeholder="Add new task" id="task" name="task">
 								<label class="sr" for="task">Add a new task</label>
@@ -79,7 +70,7 @@
 
 								//OUTPUT DATA OF EACH ROW
 								if (mysqli_num_rows($result) > 0) {
-					
+
 									$uniqueID = 0;
 									while ($row = mysqli_fetch_assoc($result)) :
 										$uniqueID++;
@@ -91,8 +82,11 @@
 										$counter = count($checked);
 										echo $counter;
 									}
+
+										//Store database data into variable
+										$item = $row['item'];
 									?>
-									
+				
 									<div class="checkbox__wrapper">
 										<div>
 											<?php if(!isset($_POST['item'])) { ?>
@@ -100,8 +94,9 @@
 											<?php } else { ?>
 												<input class="uncheck" name="item[]" value="<?php echo $uniqueID ?>" id="complete<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 											<?php }?>
-											<label id="checkLabel" for="item"><?php echo $row['item'] ?></label>
+											<label id="checkLabel" for="item"><?php echo $item ?></label>
 										</div>
+									
 										<input placeholder="Update task" type="text" id="updateTask" name="update[]">
 										<label class="sr" for="fname">First name:</label>
 									</div>
@@ -128,6 +123,8 @@
 								fclose($fp);
 							endwhile;
 							?>
+										<input type="submit">
+
 							<div class="flex__wrapper">
 								<div class="marker">
 									<?php if ($tasksRemaining == 0) : ?>

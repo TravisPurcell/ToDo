@@ -38,13 +38,13 @@
 /* JQuery
 ------------------------------------- */
 
-	jQuery(document).ready(function ($) {
+jQuery(document).ready(function ($) {
 
-		jQuery('input[type="checkbox"').on('click', function () {
-			jQuery(this).parent().find('#checkLabel').toggleClass('active');
-		});	
-	});
+	jQuery('input[type="checkbox"').on('click', function () {
+		jQuery(this).parent().find('#checkLabel').toggleClass('active');
+	});	
 
+	//Ajax form submission
 	jQuery('#form').on('submit',function(e){
 		e.preventDefault();
 		var formData = new FormData(this);
@@ -60,6 +60,7 @@
 		})
 	});
 
+	//Add Task
 	jQuery('#add').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		jQuery.ajax({
@@ -74,6 +75,8 @@
 		});
 	});
 
+
+	Update task
 	jQuery('#update').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
@@ -90,6 +93,7 @@
 		// }
 	});
 
+	//Complete task
 	jQuery('.complete').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to complete your tasks?")) {
@@ -106,6 +110,7 @@
 		// }
 	});
 
+	//Uncheck all tasks
 	jQuery('#clear').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
@@ -122,13 +127,7 @@
 		// }
 	});
 
-	//Change class of checked boxes
-	jQuery('input[type="checkbox"]:checked').siblings().addClass('active');
-
-	//Cross out labels of checked boxes
-	jQuery('input[type="checkbox"]:checked').removeClass('complete');
-	jQuery('input[type="checkbox"]:checked').addClass('uncheck');
-
+	//Delete alltasks
 	jQuery('#delete').on('click', function() {
 		// if(confirm("Are you sure want to delete your tasks?")) {
 			jQuery.ajax({
@@ -140,6 +139,14 @@
 		// }
 	});
 
+	//Change class of checked boxes
+	jQuery('input[type="checkbox"]:checked').siblings().addClass('active');
+
+	//Cross out labels of checked boxes
+	jQuery('input[type="checkbox"]:checked').removeClass('complete');
+	jQuery('input[type="checkbox"]:checked').addClass('uncheck');
+
+});
 
 </script>
 
