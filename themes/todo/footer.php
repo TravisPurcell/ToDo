@@ -76,7 +76,7 @@ jQuery(document).ready(function ($) {
 	});
 
 
-	Update task
+	// Update task
 	jQuery('#update').on('click', function() {
 		var formData = new FormData(document.getElementById('form'));
 		// if(confirm("Are you sure want to update your tasks?")) {
@@ -127,7 +127,7 @@ jQuery(document).ready(function ($) {
 		// }
 	});
 
-	//Delete alltasks
+	//Delete all tasks
 	jQuery('#delete').on('click', function() {
 		// if(confirm("Are you sure want to delete your tasks?")) {
 			jQuery.ajax({
@@ -140,12 +140,29 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Change class of checked boxes
-	jQuery('input[type="checkbox"]:checked').siblings().addClass('active');
+	jQuery('input[type="checkbox"]:checked').siblings().addClass('checked');
 
 	//Cross out labels of checked boxes
 	jQuery('input[type="checkbox"]:checked').removeClass('complete');
 	jQuery('input[type="checkbox"]:checked').addClass('uncheck');
 
+	//Count Number of checked boxes
+	var tasksTotal = jQuery('.checkbox__wrapper').length;
+	var tasksCompleted = jQuery('.checked').length;
+	var tasksRemaining = tasksTotal - tasksCompleted;
+	if(tasksTotal == 0) {
+		jQuery('.btn').hide();
+		jQuery('#add').show();
+		document.getElementById('tasksRemaining').innerHTML = 'You have no tasks. Let\'s get to work!';
+	} else if(tasksRemaining == 0) {
+		document.getElementById('tasksRemaining').innerHTML = 'Good Job!' + '<br>' + 'You\'re done!';
+	} else if(tasksRemaining == 1) {
+		jQuery('.btn').show();
+		document.getElementById('tasksRemaining').innerHTML = 'Almost there!' + '<br>' + tasksRemaining + ' task left!';
+	} else {
+		jQuery('.btn').show();
+		document.getElementById('tasksRemaining').innerHTML = 'Task overload!' + '<br>' + tasksRemaining + ' tasks left!';
+	}
 });
 
 </script>

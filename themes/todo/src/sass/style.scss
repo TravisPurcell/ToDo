@@ -81,49 +81,49 @@ p {
 	display: none;
 }
 
-@media (min-width: 768px) {
+// @media (min-width: 768px) {
 
-	h1 {
+// 	h1 {
 
-	}
+// 	}
 
-	h2 {
+// 	h2 {
 
-	}
+// 	}
 
-	p {
+// 	p {
 		
-	}
-}
+// 	}
+// }
 
-@media (min-width: 992px) {
+// @media (min-width: 992px) {
 	
-	h1 {
+// 	h1 {
 
-	}
+// 	}
 
-	h2 {
+// 	h2 {
 
-	}
+// 	}
 
-	p {
+// 	p {
 		
-	}
-}
+// 	}
+// }
 
 @media (min-width: 1200px) {
 	
-	h1 {
+	// h1 {
 
-	}
+	// }
 
 	h2 {
 		font-size: 36px;
 	}
 
-	p {
+	// p {
 
-	}
+	// }
 }
 
 /* Body
@@ -151,6 +151,12 @@ p {
     flex: none;
     order: 0;
     flex-grow: 0;
+}
+
+.warning {
+	margin-top: .5em;
+	font-size: 12px;
+	font-size: .75em;
 }
 
 form {
@@ -195,7 +201,7 @@ form {
 		label {
 			margin-left: 1em;
 
-			&.active {
+			&.checked {
 				text-decoration: line-through;
 			}
 		}
@@ -220,29 +226,6 @@ form {
 
 @media (min-width: 768px) {
 
-	.outer__wrapper {
-	
-	}
-	
-	.form__wrapper {    
-
-	}
-	
-	form {
-	
-		#task {
-		
-			
-			&::placeholder {
-			
-			}
-		}
-	
-		#item {
-
-		}
-	}
-
 	.flex__wrapper {
 		display: flex;
 		justify-content: space-between;
@@ -251,6 +234,10 @@ form {
 
 	.marker p {
 		margin: 0;
+	}
+
+	.btn__wrapper {
+		margin-top: 0;
 	}
 
 	.download__wrapper {
@@ -266,49 +253,20 @@ form {
 
 @media (min-width: 992px) {
 	
-	.outer__wrapper {
 	
-	}
-	
-	.form__wrapper {    
-
-	}
-	
-	form {
-	
-		#task {
-		
-			
-			&::placeholder {
-			
-			}
-		}
-	
-		#item {
-			
-		}
-	}
 }
 
 @media (min-width: 1200px) {
 	
-	.outer__wrapper {
+	// .outer__wrapper {
 	
-	}
+	// }
 	
-	.form__wrapper {    
+	// .form__wrapper {    
 
-	}
+	// }
 	
 	form {
-	
-		#task {
-		
-			
-			&::placeholder {
-			
-			}
-		}
 
 		input[type="checkbox"] {
 			width: 3em;
