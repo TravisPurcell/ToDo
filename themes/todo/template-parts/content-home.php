@@ -64,7 +64,6 @@
 							<?php //Get Submission time
 								date_default_timezone_set("America/New_York");
 								$submissionTime = new DateTime();
-								$tasksTotal = mysqli_num_rows($result);
 							?>
 
 							<?php //Prepare new CSV file
@@ -79,19 +78,21 @@
 									$fp = fopen($path, 'a');
 
 									//Create Header data
-									$dataHeader = array('Task', 'Created On');
+									$dataHeader = array('Task', 'Created On', 'Status');
 									fputcsv($fp, $dataHeader);	
 								}
 							?>
 							
 							<?php //Fetch SQL Data
+								$tasksTotal = mysqli_num_rows($result);
 								if (mysqli_num_rows($result) > 0) {
 									$uniqueValue = 0;
 									while ($row = mysqli_fetch_assoc($result)) {
 										$uniqueValue++; //Increment ID for each task checkbox 
 
 										//Store database data into variable
-										$item = $row['item']; ?>
+										$item = $row['item']; 
+										$status = $row['status']; ?>
 				
 										<div class="checkbox__wrapper">
 											<div>
@@ -108,7 +109,11 @@
 									
 									//Open file
 										$fp = fopen($path, 'a');
-										$data = array($item, $submissionTime->format('m/d/y | H:i:s'));
+										if($status == 1) {
+											$data = array($item, $submissionTime->format('m/d/y'), 'Completed');
+										} else {
+											$data = array($item, $submissionTime->format('m/d/y'), 'In Progress');
+										}
 
 										//Write to file
 										fputcsv($fp, $data);
@@ -122,7 +127,7 @@
 								if ($tasksTotal !== 0) { ?>
 
 								<!--Task Update & Select -->
-								<input placeholder="Update task" type="text" id="updateTask" name="update">
+								<input placeholder="Enter task update here..." type="text" id="updateTask" name="update">
 								<label class="sr" for="fname">First name:</label>
 								<input placeholder="1" min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
 								<label class="taskSelect" for="taskSelect">Select a task number by row to update or uncheck. &nbsp;<strong>(Required)</strong></label>
@@ -154,7 +159,7 @@
 									</div>
 								</div>
 								<div class="download__wrapper">
-									<a download="Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV</a>
+									<a download="Current Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV</a>
 								</div>
 							<?php } ?>
 						</form>
