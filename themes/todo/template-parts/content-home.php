@@ -125,7 +125,7 @@
 								<input placeholder="Update task" type="text" id="updateTask" name="update">
 								<label class="sr" for="fname">First name:</label>
 								<input placeholder="1" min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
-								<label class="taskSelect" for="taskSelect">Select a task number by row or uncheck. &nbsp;<strong>(Required)</strong></label>
+								<label class="taskSelect" for="taskSelect">Select a task number by row to update or uncheck. &nbsp;<strong>(Required)</strong></label>
 
 
 								<div class="flex__wrapper">
