@@ -23,14 +23,4 @@
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     mysqli_close($conn);
-
-    //Get CSV directoy
-    $path = get_template_directory() . '/tasks.csv';
-
-    //Create new file
-    //Open file
-    $fp = fopen($path, 'a');
-
-    //Delete CSV file
-    unlink($path);
 ?>

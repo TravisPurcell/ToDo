@@ -66,6 +66,23 @@
 								$submissionTime = new DateTime();
 								$tasksTotal = mysqli_num_rows($result);
 							?>
+
+							<?php //Prepare new CSV file
+								//Get CSV directoy
+								$path = get_template_directory() . '/tasks.csv';
+
+								//Delete old CSV file
+								unlink($path);
+
+								//Check if file exists
+								if( !file_exists( $path ) ){ 
+									$fp = fopen($path, 'a');
+
+									//Create Header data
+									$dataHeader = array('Task', 'Created On');
+									fputcsv($fp, $dataHeader);	
+								}
+							?>
 							
 							<?php //Fetch SQL Data
 								if (mysqli_num_rows($result) > 0) {
@@ -86,26 +103,16 @@
 												<label id="checkLabel" for="item"><?php echo $item ?></label>
 											</div>
 										</div>
-												
-										<?php //Generate output for text file
-										//Get CSV directoy
-										$path = get_template_directory() . '/tasks.csv';
 
-										//Check if file exists
-										if( !file_exists( $path ) ){ 
-											$fp = fopen($path, 'a');
-
-											//Create Header data
-											$dataHeader = array('Task', 'Submitted On');
-											fputcsv($fp, $dataHeader);	
-										}
-
-										//Open file
+									<?php //Create & Write tasks to CSV
+									
+									//Open file
 										$fp = fopen($path, 'a');
-										$data = array($row['item'], $submissionTime->format('m/d/y H:i:s'));
+										$data = array($item, $submissionTime->format('m/d/y | H:i:s'));
 
 										//Write to file
 										fputcsv($fp, $data);
+
 										fclose($fp);
 									} 
 								} // End SQL Data fetch 
