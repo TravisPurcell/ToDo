@@ -1,6 +1,7 @@
 <?php 
    
    if(isset($_POST['item'])) {
+       $taskSelect = $_POST['taskSelect'];
         
         foreach ($_POST['item'] as $key => $value) { 
 
@@ -15,7 +16,7 @@
                 printf("Connect failed: %s<br />", $conn->connect_error);
                 exit();
             }
-             printf('Connected successfully.<br />');
+            printf('Connected successfully.<br />');
 
             // SQL QUERY
             $query  = "SELECT * FROM Tasks";
@@ -27,8 +28,7 @@
             if (mysqli_num_rows($result) > 0) {
                 $numberOfRows = mysqli_num_rows($result);
                 $row = mysqli_fetch_assoc($result);
-                $sql = "UPDATE Tasks SET status = 0";
-            echo $value;
+                $sql = "UPDATE Tasks SET status = 0 WHERE ID = $taskSelect";
             }
 
             //Check connection success
