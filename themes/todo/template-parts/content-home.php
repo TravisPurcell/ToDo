@@ -86,9 +86,9 @@
 							
 							<?php //Fetch SQL Data
 								if (mysqli_num_rows($result) > 0) {
-									$uniqueID = 0;
+									$uniqueValue = 0;
 									while ($row = mysqli_fetch_assoc($result)) {
-										$uniqueID++; //Increment ID for each task checkbox 
+										$uniqueValue++; //Increment ID for each task checkbox 
 
 										//Store database data into variable
 										$item = $row['item']; ?>
@@ -96,9 +96,9 @@
 										<div class="checkbox__wrapper">
 											<div>
 												<?php if(!isset($_POST['item'])) { ?>
-													<p class="number"><?php echo $uniqueID . '. ' ?></p><input class="complete" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+													<p class="number"><?php echo $uniqueValue . '. ' ?></p><input class="complete" name="item[]" value="<?php echo $uniqueValue ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<?php } else { ?>
-													<p class="number"><?php echo $uniqueID . '. ' ?></p><input class="uncheck" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+													<p class="number"><?php echo $uniqueValue . '. ' ?></p><input class="uncheck" name="item[]" value="<?php echo $uniqueValue ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<?php }?>
 												<label id="checkLabel" for="item"><?php echo $item ?></label>
 											</div>
@@ -125,7 +125,7 @@
 								<input placeholder="Update task" type="text" id="updateTask" name="update">
 								<label class="sr" for="fname">First name:</label>
 								<input placeholder="1" min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
-								<label class="taskSelect" for="taskSelect">Select a task number by row to update. &nbsp;<strong>(Required)</strong></label>
+								<label class="taskSelect" for="taskSelect">Select a task number by row or uncheck. &nbsp;<strong>(Required)</strong></label>
 
 
 								<div class="flex__wrapper">
