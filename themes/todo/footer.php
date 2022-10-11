@@ -76,22 +76,6 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
-	// jQuery('.add').on('keypress', function (e) {
-    // 	if (e.which == 13) {
-	// 	var formData = new FormData(document.getElementById('form'));
-	// 	jQuery.ajax({
-	// 		type:'POST',
-	// 		url: jQuery('#form').attr('action'),
-	// 		data:formData,
-	// 		cache:false,
-	// 		contentType: false,
-	// 		processData: false,
-	// 		}).done(function() {
-	// 			location.reload(true);
-	// 	});
-	// });
-
-
 	// Update task
 	jQuery('#update').on('click', function(e) {
 		e.preventDefault();
@@ -160,7 +144,7 @@ jQuery(document).ready(function ($) {
 	});
 
 	//Change class of checked boxes
-	jQuery('input[type="checkbox"]:checked').siblings().addClass('checked');
+	jQuery('input[type="checkbox"]:checked').siblings('label').addClass('checked');
 
 	//Cross out labels of checked boxes
 	jQuery('input[type="checkbox"]:checked').removeClass('complete');
@@ -173,7 +157,7 @@ jQuery(document).ready(function ($) {
 	if(tasksTotal == 0) {
 		jQuery('.btn').hide();
 		jQuery('#add').show();
-		document.getElementById('tasksRemaining').innerHTML = 'You have no tasks. Let\'s get to work!';
+		document.getElementById('tasksRemaining').innerHTML = 'You have no tasks.';
 	} else if(tasksRemaining == 0) {
 		document.getElementById('tasksRemaining').innerHTML = 'Good Job!' + '<br>' + 'You\'re done!';
 	} else if(tasksRemaining == 1) {

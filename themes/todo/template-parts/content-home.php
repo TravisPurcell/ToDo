@@ -52,7 +52,10 @@
 				<div class="col-12"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 					<div class="form__wrapper">
 						<form id="form" action="storage.php" method="post">
+							<!--Check for submission error -->
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
+							
+							<!--Submission is disabled in the 'Add new task' input itself to allow realtime updates via AJAX -->
 							<input class="add" type="text" placeholder="Add new task*" id="task" name="task">
 							<label class="sr" for="task">Add a new task</label>
 							<p class="warning">*Task will not be added if field is left empty.</p>
@@ -76,9 +79,9 @@
 										<div class="checkbox__wrapper">
 											<div>
 												<?php if(!isset($_POST['item'])) { ?>
-													<input class="complete" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+													<p class="number"><?php echo $uniqueID . '. ' ?></p><input class="complete" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<?php } else { ?>
-													<input class="uncheck" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
+													<p class="number"><?php echo $uniqueID . '. ' ?></p><input class="uncheck" name="item[]" value="<?php echo $uniqueID ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<?php }?>
 												<label id="checkLabel" for="item"><?php echo $item ?></label>
 											</div>
@@ -107,15 +110,14 @@
 									} 
 								} // End SQL Data fetch 
 							?>
-
 						
-							<?php // Show Task update & select & first wrapper if tasks are more than 0
+							<?php //Show Task update & select & first wrapper if tasks are more than 0
 								if ($tasksTotal !== 0) { ?>
 
 								<!--Task Update & Select -->
 								<input placeholder="Update task" type="text" id="updateTask" name="update">
 								<label class="sr" for="fname">First name:</label>
-								<input min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
+								<input placeholder="1" min="1" max="<?php echo $tasksTotal ?>" type="number" id="selectTask" name="taskSelect">
 								<label class="taskSelect" for="taskSelect">Select a task number by row to update. &nbsp;<strong>(Required)</strong></label>
 
 
@@ -125,14 +127,14 @@
 									</div>
 							<?php } ?> 
 
-							<?php // Show Add tasks button if there are no tasks
+							<?php //Show only Add tasks button if there are no tasks
 								if ($tasksTotal == 0) { ?>
 									<div class="flex__wrapper">
 										<div class="marker">
-											<p id="tasksRemaining"></p>
+											<p id="tasksRemaining2"></p>
 										</div>
 										<div class="btn__wrapper">
-											<a tabindex="0" id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
+											<a style="margin-bottom: 0;" tabindex="0" id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
 										</div>
 									</div>
 								<?php // Show all buttons if there is at least one task
@@ -144,10 +146,10 @@
 										<a tabindex="0" id="delete" href="#" class="btn slideFromLeft" aria-label="Dlete tasks">Delete tasks</a>
 									</div>
 								</div>
+								<div class="download__wrapper">
+									<a download="Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV</a>
+								</div>
 							<?php } ?>
-							<div class="download__wrapper">
-								<a download="Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV of Tasks</a>
-							</div>
 						</form>
 					</div>
 				</div>
