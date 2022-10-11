@@ -51,7 +51,7 @@
 			<div class="row"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 				<div class="col-12"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 					<div class="form__wrapper">
-						<form id="form" action="storage.php" method="post">
+						<form id="form" action="actions/storage.php" method="post">
 							<!--Check for submission error -->
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
 							
