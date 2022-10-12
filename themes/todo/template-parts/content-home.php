@@ -96,11 +96,7 @@
 				
 										<div class="checkbox__wrapper">
 											<div>
-												<?php if(!isset($_POST['item'])) { ?>
-													<p class="number"><?php echo $uniqueValue . '. ' ?></p><input class="complete" name="item[]" value="<?php echo $uniqueValue ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
-												<?php } else { ?>
-													<p class="number"><?php echo $uniqueValue . '. ' ?></p><input class="uncheck" name="item[]" value="<?php echo $uniqueValue ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
-												<?php }?>
+												<p class="number"><?php echo $uniqueValue . '. ' ?></p><input class="complete" name="item[]" value="<?php echo $uniqueValue ?>" <?php if ($row['status'] == '1') : echo "checked='checked'"; endif; ?> type="checkbox">
 												<label id="checkLabel" for="item"><?php echo $item ?></label>
 											</div>
 										</div>
@@ -155,11 +151,16 @@
 										<a tabindex="0" id="add" type="submit" value="Add task" class="btn slideFromLeft" aria-label="Add task">Add task</a>
 										<a tabindex="0" id="update" href="#" class="btn slideFromLeft" aria-label="Update tasks">Update tasks</a>
 										<a tabindex="0" id="clear" href="#" class="btn slideFromLeft" aria-label="Uncheck tasks">Uncheck tasks</a>
-										<a tabindex="0" id="delete" href="#" class="btn slideFromLeft" aria-label="Dlete tasks">Delete tasks</a>
+										<a tabindex="0" id="delete" href="#" class="btn slideFromLeft" aria-label="Delete tasks">Delete tasks</a>
 									</div>
 								</div>
 								<div class="download__wrapper">
 									<a download="Current Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV</a>
+								</div>
+								<div class="toggle__wrapper">
+									<input type="checkbox" id="switch" class="checkbox" />
+									<label for="switch" class="toggle"></label>
+									<p class="toggleLabel">Toggle<br> theme</p>
 								</div>
 							<?php } ?>
 						</form>
