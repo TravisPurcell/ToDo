@@ -5,6 +5,8 @@ $color__blue: #29ABE2;
 $color__lgray: #BDBDBD;
 $color__lgray2: #B4B4B4;
 $color__gray: #333333;
+
+$color__theme: #dda255;
 $color__bg: #E5E5E5;
 $color__font-main: #000;
 
@@ -51,6 +53,19 @@ p {
 	&:hover, &:active, &:focus {
 		background-color: transparent;
 		color: $color__blue;
+	}
+}
+
+.btn {
+	
+	&.theme {
+		background-color: $color__theme;
+		border: 2px solid $color__theme;
+
+		&:hover, &:focus, &:active {
+			background: #fff;
+			color: $color__theme;
+		}
 	}
 }
 
@@ -121,6 +136,56 @@ p {
 	}
 }
 
+/* Toggle button
+-------------------------------*/
+
+.toggle__wrapper {
+	display: flex;
+	justify-content: flex-end;
+	text-align: right;
+	margin-top: 1em;
+}
+
+.toggle {
+	position : relative ;
+	display : inline-block;
+	width : 50px;
+	height : 27px;
+	background-color: $color__theme;
+	border-radius: 30px;
+	border: 2px solid $color__lgray2;
+	cursor: pointer;
+	margin-right: .25em;
+}
+
+.toggleLabel {
+	font-size: 12px;
+}
+	   
+.toggle:after {
+	content: '';
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	background-color: #fff;
+	top: 1px;
+	left: 1px;
+	transition:  all 0.5s;
+}
+	   
+.checkbox:checked + .toggle::after {
+	left : 24px;
+}
+	   
+.checkbox:checked + .toggle {
+	background-color: $color__blue;
+}
+	   
+.checkbox {
+	display : none;
+}
+
 /* Body
 -------------------------------*/
 
@@ -158,6 +223,10 @@ p {
 	a {
 		color: $color__blue;
 		font-weight: bold;
+
+		&.theme {
+			color: $color__theme;
+		}
 	}
 }
 
@@ -244,15 +313,23 @@ input[type="number"] {
 	}
 
 	input[type="checkbox"] {
+		cursor: pointer;
 
 		&:checked {
 			color: $color__blue;
 			accent-color: $color__blue;
 		}
 
+		&.theme {
+			accent-color: $color__theme;
+		}
+
 		&:checked::after {
 			color:white;
 		}
+	}
+
+	#deleteItem {
 	}
 }
 

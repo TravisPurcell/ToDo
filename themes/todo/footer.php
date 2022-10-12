@@ -143,6 +143,13 @@ jQuery(document).ready(function ($) {
 		}
 	});
 
+	//Toggle Theme
+	jQuery('#switch').on('click', function() {
+		jQuery('.btn').toggleClass('theme');
+		jQuery('#download').toggleClass('theme');
+		jQuery('input[type="checkbox"]').toggleClass('theme');
+	});
+
 	//Change class of checked boxes
 	jQuery('input[type="checkbox"]:checked').siblings('label').addClass('checked');
 

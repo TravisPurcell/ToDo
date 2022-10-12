@@ -19,7 +19,7 @@
                 printf("Connect failed: %s<br />", $conn->connect_error);
                 exit();
             }
-            // printf('Connected successfully.<br />');
+            printf('Connected successfully.<br />');
 
             // SQL QUERY
             $query  = "SELECT * FROM Tasks";
