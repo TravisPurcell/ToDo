@@ -131,7 +131,7 @@ p {
 @media (min-width: 1200px) {
 	
 	h2 {
-		margin: 0.5em 0 1em;
+		margin: 24px 0;
 		font-size: 36px;
 	}
 }
@@ -223,6 +223,11 @@ p {
 	a {
 		color: $color__blue;
 		font-weight: bold;
+		text-decoration: none;
+
+		&:hover, &:active, &:focus {
+			text-decoration: underline;
+		}
 
 		&.theme {
 			color: $color__theme;
@@ -305,7 +310,7 @@ input[type="number"] {
 	}
 
 	label {
-		margin-left: 1em;
+		margin-left: 24px;
 
 		&.checked {
 			text-decoration: line-through;
@@ -314,8 +319,17 @@ input[type="number"] {
 
 	input[type="checkbox"] {
 		cursor: pointer;
+		-moz-appearance:none;
+		-webkit-appearance:none;
+		-o-appearance:none;
+		border: 3px solid #B4B4B4;
+		border-radius: 10px;
 
 		&:checked {
+			border: none;
+			background-color: $color__blue;
+			background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/checkbox.svg');
+			background-size: cover;
 			color: $color__blue;
 			accent-color: $color__blue;
 		}
@@ -327,9 +341,6 @@ input[type="number"] {
 		&:checked::after {
 			color:white;
 		}
-	}
-
-	#deleteItem {
 	}
 }
 
@@ -481,6 +492,14 @@ input[type="number"] {
 
 	#form {
 		width: 709px;
+	}
+
+	.checkbox__wrapper {
+		margin-bottom: 32px;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 
 	input[type="checkbox"] {
