@@ -235,8 +235,10 @@ p {
     order: 0;
 	flex-grow: 0;
 	max-width: 80%;
-	max-height: 800px;
-	overflow: overlay;
+	max-height: 500px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch
 }
 
 #form {
@@ -373,6 +375,7 @@ input[type="number"] {
 	}
 }
 
+
 @media (min-width: 768px) {
 
 	.outer__wrapper {
@@ -386,6 +389,7 @@ input[type="number"] {
 		width: 600px;
 		padding: 32px;
 		padding-bottom: 48px;
+		max-height: 800px;
 	}
 
 	#form {
