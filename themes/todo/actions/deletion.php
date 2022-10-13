@@ -17,6 +17,8 @@
 
     //Clear the database
     $sql = "TRUNCATE TABLE Tasks";
+
+    //Check Connection
     if (mysqli_query($conn, $sql)) {
         echo "Records successfully deleted";
     } else {
