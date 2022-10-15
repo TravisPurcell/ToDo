@@ -1,43 +1,31 @@
 <?php 
-   
-   if(isset($_POST['item'])) {
-       $taskSelect = $_POST['taskSelect'];
-        
-        foreach ($_POST['item'] as $key => $value) { 
 
-            //Connect to Database
-            $dbhost = 'localhost';
-            $dbuser = 'wp';
-            $dbpass = 'wp';
-            $dbname = 'todo';
-            $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    //Connect to Database
+    // $dbhost = 'localhost';
+    // $dbuser = 'tnpportf_WPK9D';
+    // $dbpass = 'Gr-l~=L~*hQU';
+    // $dbname = 'tnpportf_WPK9D';
 
-            if($conn->connect_errno ) {
-                printf("Connect failed: %s<br />", $conn->connect_error);
-                exit();
-            }
-            printf('Connected successfully.<br />');
+    $dbhost = 'localhost';
+    $dbuser = 'wp';
+    $dbpass = 'wp';
+    $dbname = 'todo';
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-            // SQL QUERY
-            $query  = "SELECT * FROM Tasks";
-
-            // FETCHING DATA FROM DATABASE
-            $result = mysqli_query($conn, $query);
-
-            //Update Data in Database
-            if (mysqli_num_rows($result) > 0) {
-                $numberOfRows = mysqli_num_rows($result);
-                $row = mysqli_fetch_assoc($result);
-                $sql = "UPDATE Tasks SET status = 0 WHERE ID = $taskSelect";
-            }
-
-            //Check connection success
-            if (mysqli_query($conn, $sql)) {
-                echo 'Row ' . $value . ' has been updated' . '<br>';
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-            mysqli_close($conn);
-        }
+    if($conn->connect_errno ) {
+        printf("Connect failed: %s<br />", $conn->connect_error);
+        exit();
     }
+    printf('Connected successfully.<br />');
+
+    //Update Data in Database
+    $sql = "UPDATE Tasks SET status = 0";
+
+    //Check connection success
+    if (mysqli_query($conn, $sql)) {
+        echo 'Row ' . $value . ' has been updated' . '<br>';
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    mysqli_close($conn);
 ?>

@@ -1,17 +1,14 @@
 <?php 
+    $deleteSelect = $_POST['deleteSelect'];
 
-    $complete = $_POST['complete'];
-    $id = $_POST['completeID'];
-    $count = count($id);
+    foreach ($_POST['deleteSelect'] as $key => $value) { 
 
-    for ($x = 0; $x < $count; $x++){
         //Connect to Database
         // $dbhost = 'localhost';
         // $dbuser = 'tnpportf_WPK9D';
         // $dbpass = 'Gr-l~=L~*hQU';
         // $dbname = 'tnpportf_WPK9D';
 
-        //Connect to Database
         $dbhost = 'localhost';
         $dbuser = 'wp';
         $dbpass = 'wp';
@@ -22,16 +19,20 @@
             printf("Connect failed: %s<br />", $conn->connect_error);
             exit();
         }
-        // printf('Connected successfully.<br />');
+        printf('Connection Successful.<br />');
 
-        //Complete item
-        $sql = "UPDATE Tasks SET status = '$complete[$x]' WHERE ID = '$id[$x]'";
-        echo $complete[$x] . PHP_EOL;
-        echo $id[$x] . PHP_EOL;
+        // SQL QUERY
+        $query  = "SELECT * FROM Tasks";
 
-        //Check connection success
+        // FETCHING DATA FROM DATABASE
+        $result = mysqli_query($conn, $query);
+
+        //Clear deleted selected task
+        $sql = "DELETE FROM Tasks WHERE ID = $value";
+
+        //Check Connection
         if (mysqli_query($conn, $sql)) {
-            echo 'Row ' . $id[$x] . ' has been updated' . '<br>';
+            echo "Records successfully deleted";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
