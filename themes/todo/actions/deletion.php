@@ -1,8 +1,11 @@
 <?php 
 
-    $taskSelect = $_POST['taskSelect'];
-
     //Connect to Database
+    // $dbhost = 'localhost';
+    // $dbuser = 'tnpportf_WPK9D';
+    // $dbpass = 'Gr-l~=L~*hQU';
+    // $dbname = 'tnpportf_WPK9D';
+
     $dbhost = 'localhost';
     $dbuser = 'wp';
     $dbpass = 'wp';
