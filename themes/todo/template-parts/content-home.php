@@ -26,13 +26,8 @@
 		$link ;
 	?>
 
-	<?php //Connect to Database
-		// $dbhost = 'localhost';
-		// $dbuser = 'tnpportf_WPK9D';
-		// $dbpass = 'Gr-l~=L~*hQU';
-		// $dbname = 'tnpportf_WPK9D';
-
-		require get_template_directory() . '/db.php';
+	<?php // Call Database
+		require get_template_directory() . '/actions/db.php';
 
 		// SQL QUERY
 		$query  = "SELECT * FROM Tasks";
@@ -46,12 +41,11 @@
 			<div class="row"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 				<div class="col-12"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 					<div class="form__wrapper">
-						<form id="form" action="/wp-content/themes/todo/actions/complete.php" method="POST">
-							<!-- <input type="submit"> -->
+						<form id="form">
+							
 							<!--Check for submission error -->
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
 							
-							<!--Submission is disabled in the 'Add new task' input itself to allow realtime updates via AJAX -->
 							<input class="addEnter" type="text" placeholder="Add new task*" id="task" name="task">
 							<label class="sr" for="task">Add a new task</label>
 							<p class="warning">*Task will not be added if field is left empty.</p>
