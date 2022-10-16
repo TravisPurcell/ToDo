@@ -16,7 +16,7 @@ Rubik
 
 ## Core Functionality
 
-The functionality of this ToDo List App is built via HTML, PHP, SQL, AJAX and JQuery.  
+The functionality of this ToDo List App is built via HTML, PHP, SQL, AJAX and JQuery. Users may add, update, delete, check complete and uncheck tasks.  
 
 ## Controls
 
