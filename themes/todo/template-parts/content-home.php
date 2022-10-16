@@ -66,7 +66,9 @@
 								$path = get_template_directory() . '/tasks.csv';
 
 								//Delete old CSV file
-								unlink($path);
+								if( file_exists( $path ) ){ 
+									unlink($path);
+								}
 
 								//Check if file exists
 								if( !file_exists( $path ) ){ 
