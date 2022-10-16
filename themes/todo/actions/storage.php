@@ -1,5 +1,6 @@
 <?php 
     $task = $_POST['task'];
+    $status = 0;
 
  	//Connect to Database
     // $dbhost = 'localhost';
@@ -11,24 +12,24 @@
     $dbuser = 'wp';
     $dbpass = 'wp';
     $dbname = 'todo';
-     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-     if($conn->connect_errno ) {
-         printf("Connect failed: %s<br />", $conn->connect_error);
-         exit();
-     }
-     printf('Connected successfully.<br />');
-
-    //Insert Data into Database
+    if($conn->connect_errno ) {
+        printf("Connect failed: %s<br />", $conn->connect_error);
+        exit();
+    }
+    printf('Connected successfully.<br />');
+    
+    //Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO Tasks (item, status) VALUES (?, ?)");
     if(!empty($task)) {
-        $sql = "INSERT INTO Tasks (item, status) VALUES ('$task', '0')";
+        $stmt->bind_param("ss", $task, $status);
     }
 
-    //Check connection success
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
+    //Execute
+    $stmt->execute();
+
+    //Close
+    $stmt->close();
+    $conn->close();
 ?>

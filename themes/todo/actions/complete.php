@@ -22,19 +22,17 @@
             printf("Connect failed: %s<br />", $conn->connect_error);
             exit();
         }
-        // printf('Connected successfully.<br />');
+        printf('Connected successfully.<br />');
 
-        //Complete item
-        $sql = "UPDATE Tasks SET status = '$complete[$x]' WHERE ID = '$id[$x]'";
-        echo $complete[$x] . PHP_EOL;
-        echo $id[$x] . PHP_EOL;
+        //Prepare and bind
+        $stmt = $conn->prepare("UPDATE Tasks SET status = ? WHERE ID = ?");
+        $stmt->bind_param("ss", $complete[$x], $id[$x]);
 
-        //Check connection success
-        if (mysqli_query($conn, $sql)) {
-            echo 'Row ' . $id[$x] . ' has been updated' . '<br>';
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-        mysqli_close($conn);
+        //Execute
+        $stmt->execute();
+
+        //Close
+        $stmt->close();
+        $conn->close();
     }
 ?>

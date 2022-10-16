@@ -79,24 +79,26 @@ p {
 	padding: 0.85em 0.15em;
 	display: block;
 	opacity: 0;
-  }
+}
  
-  .btn.slideFromLeft:hover::after {
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	transition: all 0.2s;
-	opacity: 1;
-  }
-  .btn.slideFromLeft::after {
-	top: 0;
-	bottom: 0;
-	right: 75%;
-  }
+.btn.slideFromLeft:hover::after {
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+transition: all 0.2s;
+opacity: 1;
+}
+
+.btn.slideFromLeft::after {
+top: 0;
+bottom: 0;
+right: 75%;
+}
 
 .sr {
-	display: none !important;
+	position: absolute;
+	visibility: hidden !important;
 }
 
 @media (min-width: 375px) and (max-width: 767px) {
@@ -142,30 +144,30 @@ p {
 -------------------------------*/
 
 .tooltip {
-	position: relative;
-	display: inline-block;
-  }
+position: relative;
+display: inline-block;
+}
   
-  .tooltip .tooltiptext {
-	bottom: 2.5em;
-	right: -29%;
-	visibility: hidden;
-	width: 120px;
-	background-color: $color__blue;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-	box-shadow: 0px 5px 5px 0px rgb(0 0 0 / 20%);
+.tooltip .tooltiptext {
+bottom: 2.5em;
+right: -29%;
+visibility: hidden;
+width: 120px;
+background-color: $color__blue;
+color: #fff;
+text-align: center;
+border-radius: 6px;
+padding: 5px 0;
+box-shadow: 0px 5px 5px 0px rgb(0 0 0 / 20%);
+
+/* Position the tooltip */
+position: absolute;
+z-index: 1;
+}
   
-	/* Position the tooltip */
-	position: absolute;
-	z-index: 1;
-  }
-  
-  .tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext, .tooltip:active .tooltiptext {
-	visibility: visible;
-  }
+.tooltip:hover .tooltiptext, .tooltip:focus .tooltiptext, .tooltip:active .tooltiptext {
+visibility: visible;
+}
 
 /* Toggle button
 -------------------------------*/
@@ -179,7 +181,7 @@ p {
 .toggle {
 	position : relative ;
 	display : inline-block;
-	width : 50px;
+	width : 44px;
 	height : 20px;
 	background-color: $color__theme;
 	border-radius: 30px;
@@ -222,6 +224,7 @@ p {
 	}
 
 	.toggle {
+		width: 50px;
 		height : 27px;
 	}
 
@@ -234,70 +237,63 @@ p {
 /* Scrollbar
 -------------------------------*/
 
-/* width */
 ::-webkit-scrollbar {
 	width: 16px;
 	border-radius: 16px;
-  }
+}	
   
-  /* Track */
-  ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
 	background: #eee;
 	box-shadow: inset 0 0 5px #fff; 
 	border-radius: 16px;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: $color__lgray;
-	border-radius: 16px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: $color__blue;
-  }
-
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
 }
 
-/* The slider itself */
+::-webkit-scrollbar-thumb {
+	background: $color__lgray;
+	border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: $color__blue;
+}
+
+.slidecontainer {
+  width: 100%; 
+}
+
 .slider {
-  -webkit-appearance: none;  /* Override default CSS styles */
+  -webkit-appearance: none; 
   appearance: none;
-  width: 100%; /* Full-width */
-  height: 25px; /* Specified height */
-  background: #d3d3d3; /* Grey background */
-  outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3; 
+  outline: none; 
+  opacity: 0.7; 
+  -webkit-transition: .2s;
   transition: opacity .2s;
 }
 
-/* Mouse-over effects */
 .slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1; 
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
+  -webkit-appearance: none; 
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04AA6D; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  height: 25px;
+  background: #04AA6D; 
+  cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04AA6D; /* Green background */
-  cursor: pointer; /* Cursor on hover */
+  width: 25px;
+  height: 25px;
+  background: #04AA6D; 
+  cursor: pointer;
 }
 
-/* Body
+/* Content
 -------------------------------*/
 
 .outer__wrapper {
@@ -329,6 +325,46 @@ p {
 	width: 100%;
 }
 
+//Form Inputs
+
+input[type="text"] {
+	border: none;
+	width: 90%;
+}
+
+input[type="checkbox"] {
+	width: 28px;
+	height: 28px;
+	cursor: pointer;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	-o-appearance:none;
+	border: 3px solid #B4B4B4;
+	border-radius: 10px;
+	margin-left: 0;
+	margin-right: 1em;
+	box-shadow: 0px 5px 5px 0px rgb(0 0 0 / 20%);
+
+	&.checked {
+		border: none;
+		background-color: $color__blue;
+		background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/checkbox.svg');
+		background-size: cover;
+		color: $color__blue;
+		accent-color: $color__blue;
+	}
+
+	&.theme.checked {
+		accent-color: $color__theme;
+
+		&:checked {
+			background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/checkbox-orange.svg');
+		}
+	}
+}
+
+//End Form Inputs
+
 .download__wrapper {
 
 	a {
@@ -350,16 +386,6 @@ p {
 	margin-top: .5em;
 	font-size: 12px;
 	font-size: .75em;
-}
-
-.taskSelect {
-	margin-right: 1em;
-	margin-top: 1em;
-	margin-bottom: 1em;
-	font-size: 12px;
-	font-size: .75em;
-	display: flex;
-	justify-content: flex-start;
 }
 
 #tasksRemaining {
@@ -391,23 +417,6 @@ p {
 	}
 }
 
-.number {
-	margin-bottom: 0;
-	width: 12px;
-}
-
-#updateTask {
-	border: none;
-	border-bottom: 1px solid $color__font-main;
-	height: 3em;
-	width: 75%;
-}
-
-input[type="text"] {
-	border: none;
-	width: 90%;
-}
-
 .checkbox__wrapper {
 	margin-bottom: 1em;
 	display: flex;
@@ -420,60 +429,27 @@ input[type="text"] {
 		align-items: center;
 	}
 
-	.task__name {
-
-		input.crossed {
-			text-decoration: line-through;
-		}
-	}
-
-	input[type="checkbox"] {
-		width: 28px;
-		height: 28px;
-		cursor: pointer;
-		-moz-appearance:none;
-		-webkit-appearance:none;
-		-o-appearance:none;
-		border: 3px solid #B4B4B4;
-		border-radius: 10px;
-		margin-left: 0;
-		margin-right: 1em;
-
-		&.checked {
-			border: none;
-			background-color: $color__blue;
-			background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/checkbox.svg');
-			background-size: cover;
-			color: $color__blue;
-			accent-color: $color__blue;
-		}
-
-		&.theme.checked {
-			accent-color: $color__theme;
-
-			&:checked {
-				background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/checkbox-orange.svg');
-			}
-		}
-	}
-
 	.task__checkbox {
 		flex-basis: 10%;
 	}
 
 	.task__name {
-		flex-basis: 100%;
+		flex-basis: 400%;
 
 		input {
 			font-size: 16px;
 			font-size: 1em;
+		}
+
+		input.crossed {
+			text-decoration: line-through;
 		}
 	}
 }
 
 .option__wrapper {
 
-	.uncheck, .deleteSelect {
+	.deleteSelect {
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;
@@ -481,40 +457,24 @@ input[type="text"] {
 		border: 2px solid #B4B4B4;
 		color: $color__blue;
 		display: inline-block;
-		width: 15px;
-		height: 15px;  
+		width: 20px;
+		height: 20px;  
 		padding: 3px;
 		border-radius: 50%;
 		margin-right: 0;
-
-		&:hover, &:focus, &:active {
-			border: 2px solid #B4B4B4;
-			color: $color__red;
-		}
-	}
-
-	.uncheck {
-		display: none;
-		position: absolute;
-		left: 15%;
-		top: 55%;
-
-		&.active {
-			display: block;
-			background-color: $color__red;
-		}
-	}
-
-	.deleteSelect {
 		background-image: url('https://tnp-portfolio.com/wp-content/uploads/2022/10/close-icon.svg');
 		background-color: $color__red;
 		background-size: 8px;
 		background-repeat: no-repeat;
 		background-position: center;
 		transition: .25s ease-in-out;
+		box-shadow: 0px 3px 5px 0px rgb(0 0 0 / 20%);
 
-		&:hover, &:active, &:focus {
+
+		&:hover, &:focus, &:active {
 			transform: scale(1.35);
+			border: 2px solid #B4B4B4;
+			color: $color__red;
 		}
 	}
 }
@@ -523,7 +483,7 @@ input[type="text"] {
 	margin: 4em 0 0;
 
 	&.top {
-		margin: 2em 0 4em;
+		margin: 2em 0;
 	}
 }
 
@@ -540,28 +500,6 @@ input[type="text"] {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-
-@media (min-width: 375px) {
-
-	.option__wrapper {
-
-		.uncheck {
-			position: absolute;
-			left: 12%;
-		}
-	}
-}
-
-@media (min-width: 425px) {
-
-	.option__wrapper {
-
-		.uncheck {
-			position: absolute;
-			left: 11%;
-		}
-	}
 }
 
 
@@ -581,8 +519,37 @@ input[type="text"] {
 		max-height: 800px;
 	}
 
+	//Form Inputs
+
+	input[type="checkbox"] {
+		width: 32px;
+		height: 32px;
+	}
+
+	//End Form Inputs
+
+
 	#form {
 		width: 535px;
+	}
+
+	.checkbox__wrapper {
+		margin-bottom: 24px;
+
+		.task__name {
+	
+			input {
+				font-size: 24px;
+				font-size: 1.5em;
+			}
+		}
+	}
+
+	.controls {
+		
+		&.top {
+			margin: 2em 0 3em;
+		}
 	}
 
 	#task {
@@ -594,48 +561,27 @@ input[type="text"] {
 		}
 	}
 
-	#updateTask {
-		margin-top: 2em;
-	}
+	.option__wrapper {
+		display: flex;
+		justify-content: space-between;
+		max-width: 150px;
+		width: 150px;
 
-	.checkbox__wrapper {
-
-		label {
-			margin-left: 24px;
+		div {
+			display: block;
+			text-align: center;
 		}
 
-		input[type="checkbox"] {
-			width: 32px;
-			height: 32px;
+		.deleteSelect {
+			width: 15px;
+			height: 15px;  
+			padding: 3px;
+			margin-right: 0;
 		}
 
-		.option__wrapper {
-			display: flex;
-			justify-content: space-between;
-			max-width: 150px;
-			width: 150px;
-
-			div {
-				display: block;
-				text-align: center;
-			}
-
-			.uncheck, .deleteSelect {
-				width: 15px;
-				height: 15px;  
-				padding: 3px;
-				margin-right: 0;
-			}
-
-			.deleteSelect {
-				width: 24px;
-				height: 24px;
-			}
-
-			.uncheck {
-				left: 8.5%;
-				top: 55%;
-			}
+		.deleteSelect {
+			width: 24px;
+			height: 24px;
 		}
 
 		.task__name {
@@ -647,9 +593,21 @@ input[type="text"] {
 		}
 	}
 
-	label {
-		font-size: 24px;
-		line-height: 32px;
+	.btn__wrapper {
+		margin-bottom: 2em;
+		display: block;
+		max-width: 100%;
+
+		.btn {
+
+			& + .btn {
+				margin-left: 1.5em;
+			}
+
+			&:nth-of-type(3), &:nth-of-type(4) {
+				margin-bottom: 0;
+			}
+		}
 	}
 
 	.flex__wrapper {
@@ -658,40 +616,12 @@ input[type="text"] {
 		align-items: flex-end;
 	}
 
-	.taskSelect {
-		margin-top: 0;
-		margin-bottom: 3em;
-	}
-
-	.number {
-		width: 24px;
-		font-size: 24px;
-	}
-
-	#updateTask {
-		width: 88%;
-	}
-
 	#tasksRemaining {
 		margin: 0;
 	}
 
-	.btn__wrapper {
-		justify-content: space-between;
-		align-items: flex-start;
-		margin-bottom: 2em;
-
-		.btn {
-
-			&:nth-of-type(3), &:nth-of-type(4) {
-				margin-bottom: 0;
-			}
-		}
-	}
-
 	.download__wrapper {
 		margin-top: 1.5em;
-		text-align: right;
 	}
 }
 
@@ -701,52 +631,29 @@ input[type="text"] {
 		width: 675px;
 	}
 
-	.form__wrapper {
-		width: 790px;
-	}
-
-	#tasksRemaining {
-		margin-bottom: -.65em;
-	}
-
-	input[type="checkbox"] {
-		width: 28px;
-		height: 28px;
-	}
-
-	label {
-		font-size: 28px;
-		line-height: 34px;
-	}
-
-	.number {
-		width: 28px;
-		font-size: 28px;
-	}
-	
-	.btn__wrapper {
-		display: block;
-		max-width: 100%;
-	}
-
 	.checkbox__wrapper {
-
-		.option__wrapper {
-
-			.uncheck {
-				left: 7.5%;
-				top: 55%;
-			}
-		}
 
 		.task__name {
 	
 			input {
 				font-size: 28px;
 				font-size: 1.75em;
-			}		
+			}
 		}
 	}
+
+	.form__wrapper {
+		width: 790px;
+	}
+
+	//Form Inputs
+
+	input[type="checkbox"] {
+		width: 28px;
+		height: 28px;
+	}
+
+	//End Form Inputs
 }
 
 @media (min-width: 1200px) {
@@ -782,39 +689,20 @@ input[type="text"] {
 			padding: .5em 1.5em;
 			font-size: 18px;
 			font-size: 1.125em;
-
-			& + .btn {
-				margin-left: 1.5em;
-			}
 		}
 	}
+
+	//Form Inputs
 
 	input[type="checkbox"] {
 		width: 32px;
 		height: 32px;
 	}
 
-	label {
-		font-size: 32px;
-		line-height: 38px;
-	}
-
+	//End Form Inputs
+	
 	#task {
 		width: 685px;
 		height: 51px;
 	}
-
-	.number {
-		width: 20px;
-		font-size: 20px;
-	}
-
-	#updateTask {
-		width: 92%;
-	}
-
-	.btn {
-		min-width: 120px;
-	}
-
 }

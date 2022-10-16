@@ -27,15 +27,16 @@
             }
             printf('Connected successfully.<br />');
 
-            $sql = "UPDATE Tasks SET item = '$update[$x]' WHERE ID = '$id[$x]'";
+            //Prepare and bind
+            $stmt = $conn->prepare("UPDATE Tasks SET item = ? WHERE ID = ?");
+            $stmt->bind_param("ss", $update[$x], $id[$x]);
 
-            //Check connection success
-            if (mysqli_query($conn, $sql)) {
-                echo 'Row ' . $update[$x] . ' has been updated' . '<br>';
-            } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-            }
-            mysqli_close($conn);
+            //Execute
+            $stmt->execute();
+
+            //Close
+            $stmt->close();
+            $conn->close();
         }
     }
 

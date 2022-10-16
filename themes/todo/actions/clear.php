@@ -18,14 +18,15 @@
     }
     printf('Connected successfully.<br />');
 
-    //Update Data in Database
-    $sql = "UPDATE Tasks SET status = 0";
+    //Prepare and bind
+    $stmt = $conn->prepare("UPDATE Tasks SET status = ?");
+    $value = 0;
+    $stmt->bind_param("s", $value);
 
-    //Check connection success
-    if (mysqli_query($conn, $sql)) {
-        echo 'Row ' . $value . ' has been updated' . '<br>';
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
+    //Execute
+    $stmt->execute();
+
+    //Close
+    $stmt->close();
+    $conn->close();
 ?>

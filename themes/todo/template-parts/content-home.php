@@ -32,17 +32,7 @@
 		// $dbpass = 'Gr-l~=L~*hQU';
 		// $dbname = 'tnpportf_WPK9D';
 
-		$dbhost = 'localhost';
-		$dbuser = 'wp';
-		$dbpass = 'wp';
-		$dbname = 'todo';
-		$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-
-		if($conn->connect_errno ) {
-			printf("Connect failed: %s<br />", $conn->connect_error);
-			exit();
-		}
-		printf('Connected successfully.<br />');
+		require get_template_directory() . '/db.php';
 
 		// SQL QUERY
 		$query  = "SELECT * FROM Tasks";
@@ -56,12 +46,13 @@
 			<div class="row"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 				<div class="col-12"><!--Class Placeholder for Bootstrap installation. Bootstrap not used for demo -->
 					<div class="form__wrapper">
-						<form id="form" action="/wp-content/themes/todo/actions/uncheck.php" method="POST">
+						<form id="form" action="/wp-content/themes/todo/actions/complete.php" method="POST">
+							<!-- <input type="submit"> -->
 							<!--Check for submission error -->
 							<?php if (isset($_GET['error'])) : ?> <p class="error"><?php echo $_GET['error']; ?></p> <?php endif; ?>
 							
 							<!--Submission is disabled in the 'Add new task' input itself to allow realtime updates via AJAX -->
-							<input class="add" type="text" placeholder="Add new task*" id="task" name="task">
+							<input class="addEnter" type="text" placeholder="Add new task*" id="task" name="task">
 							<label class="sr" for="task">Add a new task</label>
 							<p class="warning">*Task will not be added if field is left empty.</p>
 							<div class="controls top">
@@ -125,10 +116,6 @@
 												<label class="sr" for="update"><?php echo $item ?></label>
 											</div>
 											<div class="option__wrapper">
-												<div>
-													<input value="<?php echo $id ?>" class="uncheck" name="uncheck[]" type="radio">
-													<label class="sr" for="uncheck">Uncheck task number <?php echo $id ?></label>
-												</div>
 												<div>
 													<input value="<?php echo $id ?>" class="deleteSelect" name="deleteSelect[]" type="radio">
 													<label class="sr" for="deleteSelect">Delete task number <?php echo $id ?></label>

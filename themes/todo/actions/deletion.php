@@ -18,14 +18,13 @@
     }
     printf('Connection Successful.<br />');
 
-    //Clear the database
-    $sql = "TRUNCATE TABLE Tasks";
+    //Prepare and bind
+    $stmt = $conn->prepare("TRUNCATE TABLE Tasks");
 
-    //Check Connection
-    if (mysqli_query($conn, $sql)) {
-        echo "Records successfully deleted";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
+    //Execute
+    $stmt->execute();
+
+    //Close
+    $stmt->close();
+    $conn->close();
 ?>

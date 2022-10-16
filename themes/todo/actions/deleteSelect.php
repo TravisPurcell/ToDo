@@ -21,21 +21,15 @@
         }
         printf('Connection Successful.<br />');
 
-        // SQL QUERY
-        $query  = "SELECT * FROM Tasks";
+        //Prepare and bind
+        $stmt = $conn->prepare("DELETE FROM Tasks WHERE ID = ?");
+        $stmt->bind_param("s", $value);
 
-        // FETCHING DATA FROM DATABASE
-        $result = mysqli_query($conn, $query);
+        //Execute
+        $stmt->execute();
 
-        //Clear deleted selected task
-        $sql = "DELETE FROM Tasks WHERE ID = $value";
-
-        //Check Connection
-        if (mysqli_query($conn, $sql)) {
-            echo "Records successfully deleted";
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-        mysqli_close($conn);
+        //Close
+        $stmt->close();
+        $conn->close();
     }
 ?>
