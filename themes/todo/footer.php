@@ -66,6 +66,22 @@ jQuery(document).ready(function ($) {
 		});
 	});
 
+	jQuery('.add').on('keypress', function (e) {
+		if (e.which == 13) {
+			var formData = new FormData(document.getElementById('form'));
+			jQuery.ajax({
+				type:'POST',
+				url: "/wp-content/themes/todo/actions/storage.php",
+				data:formData,
+				cache:false,
+				contentType: false,
+				processData: false,
+				}).done(function() {
+					location.reload(true);
+			});
+		}
+	});
+
 	jQuery('.addEnter').on('keypress', function (e) {
 		if (e.which == 13) {
 			var formData = new FormData(document.getElementById('form'));
@@ -198,17 +214,21 @@ jQuery(document).ready(function ($) {
 
 	jQuery('.deleteSelect').on('keypress', function (e) {
 		if (e.which == 13) {
+			e.preventDefault();
+			jQuery('.deleteSelect').attr('checked', 'true');
 			var formData = new FormData(document.getElementById('form'));
-			jQuery.ajax({
-				method: "POST",
-				url: "/wp-content/themes/todo/actions/deleteSelect.php",
-				data:formData,
-				cache:false,
-				contentType: false,
-				processData: false,
-				}).done(function() {
-					location.reload(true);
-			});
+			if(confirm("Warning! This will delete the selected task!\nAre you sure?")) {
+				jQuery.ajax({
+					method: "POST",
+					url: "/wp-content/themes/todo/actions/deleteSelect.php",
+					data:formData,
+					cache:false,
+					contentType: false,
+					processData: false,
+					}).done(function() {
+						location.reload(true);
+				});
+			}
 		}
 	});
 
@@ -246,10 +266,19 @@ jQuery(document).ready(function ($) {
 
 	//Toggle Theme
 	jQuery('#switch').on('click', function() {
-		jQuery(this).siblings('label').toggleClass('theme');
+		jQuery(this).find('label').toggleClass('theme');
 		jQuery('.btn').toggleClass('theme');
 		jQuery('#download').toggleClass('theme');
 		jQuery('input[type="checkbox"]').toggleClass('theme');
+	});
+
+	jQuery('#switch').on('keypress', function(e) {
+		if (e.which == 13) {
+			jQuery(this).find('label').toggleClass('theme');
+			jQuery('.btn').toggleClass('theme');
+			jQuery('#download').toggleClass('theme');
+			jQuery('input[type="checkbox"]').toggleClass('theme');
+		}
 	});
 
 	//Change value of checkboxes if checked or not
@@ -270,6 +299,22 @@ jQuery(document).ready(function ($) {
 		}
 		jQuery('.unchecked').attr('value', '0');
 		jQuery('.checked').attr('value', '1');
+	});
+
+	jQuery('.tick').on('keypress', function(e) {
+		if (e.which == 13) {
+			if(jQuery(this).hasClass('checked')) {
+				jQuery(this).removeClass('checked');
+				jQuery(this).addClass('unchecked');
+				jQuery(this).parent().siblings('.task__name').find('.update').removeClass('crossed');
+			} else {
+				jQuery(this).addClass('checked');
+				jQuery(this).removeClass('unchecked');
+				jQuery(this).parent().siblings('.task__name').find('.update').addClass('crossed');
+			}
+			jQuery('.unchecked').attr('value', '0');
+			jQuery('.checked').attr('value', '1');
+		}
 	});
 
 	//Count Number of checked boxes & change status

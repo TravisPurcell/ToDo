@@ -111,7 +111,7 @@
 											</div>
 											<div class="option__wrapper">
 												<div>
-													<input value="<?php echo $id ?>" class="deleteSelect" name="deleteSelect[]" type="radio">
+													<input value="<?php echo $id ?>" class="deleteSelect" name="deleteSelect[]" type="radio" tabindex="0">
 													<label class="sr" for="deleteSelect">Delete task number <?php echo $id ?></label>
 												</div>
 											</div>
@@ -167,8 +167,8 @@
 									<div class="download__wrapper">
 										<a download="Current Tasks.csv" id="download" href="<?php echo $link . 'wp-content/themes/todo/tasks.csv' ?>" aria-label="Download tasks">Download CSV</a>
 									</div>
-									<div tabindex="0" class="toggle__wrapper tooltip">
-										<input tabindex="0" type="checkbox" id="switch" class="checkbox">
+									<div tabindex="0"  id="switch" class="toggle__wrapper tooltip">
+										<input type="checkbox" class="checkbox">
 										<span class="tooltiptext">Click to toggle theme color</span>
 										<label for="switch" class="toggle"></label>
 									</div>
