@@ -31,9 +31,9 @@
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
 <script>
-	/* JQuery
+
+/* JQuery
 ------------------------------------- */
 
 jQuery(document).ready(function ($) {
@@ -45,20 +45,9 @@ jQuery(document).ready(function ($) {
 	/* Form Actions
 	---------------------------------------------------*/
 
-	//Ajax form submission
-	jQuery('#form').on('submit',function(e){
+	//Prevent standard form submission
+	jQuery('#form').on('submit', function(e){
 		e.preventDefault();
-		var formData = new FormData(this);
-		jQuery.ajax({
-			type:'POST',
-			url: "/wp-content/themes/todo/actions/storage.php",
-			data:formData,
-			cache:false,
-			contentType: false,
-			processData: false,
-		}).done(function() {
-			location.reload(true);
-		})
 	});
 
 	//Add Task
@@ -303,4 +292,5 @@ jQuery(document).ready(function ($) {
 		document.getElementById('tasksRemaining').innerHTML = 'Task overload... ' + tasksRemaining + ' tasks left!';
 	}
 });
+
 </script>
